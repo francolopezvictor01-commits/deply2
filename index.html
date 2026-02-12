@@ -41,31 +41,31 @@ body {
 /* tarjeta */
 .card {
   background: #fff5f7;
-  border-radius: 40px;
-  padding: 100px 35px;
+  border-radius: 25px;
+  padding: 25px;
   text-align: center;
   box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-  max-width: 550px;
-  width: 75%;
-  align-items: center;
+  max-width: 420px;
+  width: 90%;
 }
 
+/* texto */
 .title {
-  font-size: 2rem;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
   color: #161997;
   font-weight: bold;
 }
 
 .subtitle {
   margin-top: 10px;
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 3vw, 1.3rem);
   color: #50c25a;
 }
 
-/* dedo animado */
+/* dedo */
 .finger {
-  margin-top: 20px;
-  font-size: 3rem;
+  margin-top: 15px;
+  font-size: 2.5rem;
   animation: moveFinger 1.2s infinite ease-in-out;
 }
 
@@ -75,19 +75,10 @@ body {
   100% { transform: translateY(0); }
 }
 
-@keyframes imgHeartbeat {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.08);
-  }
-}
-
 /* botones */
 button {
-  margin: 10px;
-  padding: 10px 20px;
+  margin: 8px;
+  padding: 10px 18px;
   border: none;
   border-radius: 20px;
   font-size: 1rem;
@@ -101,7 +92,7 @@ button {
 }
 
 .btn-si:hover {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 .btn-no {
@@ -110,24 +101,31 @@ button {
   border: 2px solid #ff4d6d;
   position: relative;
 }
+
+/* imagen pregunta */
 .question-img {
-  width: 500px;
-  height: 170;
-  margin-bottom: 12px;
-  border-radius: 50px;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 20px;
   object-fit: cover;
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  border: 4px solid #76af2a;
-  display: block;
+  border: 3px solid #76af2a;
   animation: imgHeartbeat 2.5s infinite ease-in-out;
 }
 
-/* fondo oscuro romántico */
+@keyframes imgHeartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.07); }
+}
+
+/* fondo final */
 .final-bg {
   background: radial-gradient(circle, #000 40%, #050014 100%);
 }
 
-/* canvas fuegos artificiales */
+/* canvas */
 #fireworks {
   position: absolute;
   top: 0;
@@ -137,16 +135,16 @@ button {
   z-index: 1;
 }
 
-/* card romántico */
+/* card final */
 .love-card {
   position: relative;
   z-index: 2;
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(10px);
   border-radius: 20px;
-  padding: 25px;
-  max-width: 350px;
-  width: 85%;
+  padding: 18px;
+  max-width: 340px;
+  width: 90%;
   text-align: center;
   color: white;
   box-shadow: 0 0 40px rgba(255, 0, 100, 0.4);
@@ -155,7 +153,7 @@ button {
 
 .love-card h2 {
   color: #ff4d6d;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .love-card p {
@@ -163,29 +161,25 @@ button {
   line-height: 1.4;
 }
 
-/* imagen con latido */
 .love-img {
-  width: 120px;
-  height: 120px;
-  border-radius: 15px;
-  margin-top: 12px;
+  width: 110px;
+  height: 110px;
+  border-radius: 12px;
+  margin-top: 10px;
   object-fit: cover;
   animation: imgHeartbeat 1.4s infinite;
 }
 
-/* brillo del card */
 @keyframes cardGlow {
-  from {
-    box-shadow: 0 0 20px rgba(255, 0, 100, 0.3);
-  }
-  to {
-    box-shadow: 0 0 50px rgba(255, 0, 150, 0.6);
-  }
+  from { box-shadow: 0 0 20px rgba(255, 0, 100, 0.3); }
+  to { box-shadow: 0 0 50px rgba(255, 0, 150, 0.6); }
 }
-
 </style>
 </head>
 <body>
+
+<!-- AUDIO -->
+<audio id="music" src="musica.mp3" loop></audio>
 
 <!-- PANTALLA 1 -->
 <div id="home" class="section">
@@ -207,15 +201,7 @@ button {
 </div>
 
 <!-- PANTALLA 3 -->
-<!-- <div id="final" class="section hidden">
-  <div class="card">
-    <div class="title">Sabía que dirías que sí 😍</div>
-    <div class="subtitle">Te quiero mucho ❤️</div>
-  </div>
-</div> -->
-
 <div id="final" class="section hidden final-bg">
-
   <canvas id="fireworks"></canvas>
 
   <div class="love-card">
@@ -225,37 +211,37 @@ button {
       te amo con todo mi corazon y mi alma, me siento afortunado de tenerte a mi lado y aunque tengamos indiferencias y peleas sabes que puedes contar conmigo
       siempre voy a estar para vos mi amorcito lindo, gracias por lo feliz que me haces, TE AMOOOOOOOOOOOO!!!! ❤️
     </p>
-
     <img src="silvix.jpeg" class="love-img">
   </div>
-
 </div>
 
 <script>
-// cambiar de pantalla al tocar
 const home = document.getElementById("home");
 const question = document.getElementById("question");
 const final = document.getElementById("final");
 const cardHome = document.getElementById("cardHome");
+const music = document.getElementById("music");
 
 cardHome.addEventListener("click", () => {
   home.classList.add("hidden");
   question.classList.remove("hidden");
 });
 
-// botón sí
 document.getElementById("btnSi").addEventListener("click", () => {
   question.classList.add("hidden");
   final.classList.remove("hidden");
   startAutoFireworks();
+
+  // 🎵 reproducir música (funciona en celular)
+  music.play().catch(() => {
+    document.body.addEventListener("click", () => music.play(), { once: true });
+  });
 });
 
-// botón no que se mueve 😈
 const btnNo = document.getElementById("btnNo");
-
 btnNo.addEventListener("mouseover", () => {
-  const x = Math.random() * 150 - 75;
-  const y = Math.random() * 150 - 75;
+  const x = Math.random() * 120 - 60;
+  const y = Math.random() * 120 - 60;
   btnNo.style.transform = `translate(${x}px, ${y}px)`;
 });
 
@@ -273,7 +259,6 @@ function heartFirework(x, y) {
   const particles = [];
   const points = [];
 
-  // forma de corazón ❤️
   for (let t = 0; t < Math.PI * 2; t += 0.2) {
     const px = 16 * Math.pow(Math.sin(t), 3);
     const py = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
@@ -284,8 +269,8 @@ function heartFirework(x, y) {
     particles.push({
       x,
       y,
-      vx: p.x * 5,
-      vy: p.y * 5,
+      vx: p.x * 4,
+      vy: p.y * 4,
       alpha: 1
     });
   });
@@ -294,13 +279,13 @@ function heartFirework(x, y) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     particles.forEach(p => {
-      p.x += p.vx * 0.02;
-      p.y += p.vy * 0.02;
-      p.alpha -= 0.01;
+      p.x += p.vx * 0.03;
+      p.y += p.vy * 0.03;
+      p.alpha -= 0.015;
 
       ctx.fillStyle = `rgba(255, 0, 100, ${p.alpha})`;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, 7, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
       ctx.fill();
     });
 
@@ -312,8 +297,7 @@ function heartFirework(x, y) {
   animate();
 }
 
-// tocar pantalla = fuegos artificiales ❤️
-document.getElementById("final").addEventListener("click", (e) => {
+final.addEventListener("click", (e) => {
   heartFirework(e.clientX, e.clientY);
 });
 
@@ -322,16 +306,10 @@ let autoFireworks;
 function startAutoFireworks() {
   autoFireworks = setInterval(() => {
     const x = Math.random() * window.innerWidth;
-    const y = Math.random() * window.innerHeight / 2; // solo arriba
+    const y = Math.random() * window.innerHeight / 2;
     heartFirework(x, y);
-  }, 900); // cada 0.9 segundos
+  }, 800);
 }
-
-function stopAutoFireworks() {
-  clearInterval(autoFireworks);
-}
-
-
 </script>
 
 </body>
